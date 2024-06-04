@@ -1,0 +1,42 @@
+export const tasksData = [
+  {
+    id: "1",
+    title: "Ui Web Design",
+    desc: "Web Ui Design for $350",
+    status: "Running",
+    date: "Nov 23, 2023",
+    time: "6h",
+  },
+  {
+    id: "2",
+    title: "App Design Meeting",
+    desc: "Web Ui Design for $350",
+    status: "Pending",
+    date: "Nov 25, 2023",
+    time: "12h",
+  },
+  {
+    id: "3",
+    title: "Learning Backend",
+    desc: "Node js course for $50",
+    status: "Running",
+    date: "Nov 23, 2023",
+    time: "4h",
+  },
+  {
+    id: "4",
+    title: "Gym & Exercises",
+    desc: "Daily Routine",
+    status: "Completed",
+    date: "Oct 23, 2023",
+    time: "1h",
+  },
+  {
+    id: "5",
+    title: "App Design Meeting",
+    desc: "Web Ui Design for $350",
+    status: "Pending",
+    date: "Nov 25, 2023",
+    time: "12h",
+  },
+];
