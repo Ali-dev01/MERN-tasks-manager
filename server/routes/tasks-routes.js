@@ -1,5 +1,7 @@
 import express from "express";
 
+import { taskValidation } from "../validations/taskValidation.js";
+
 import {
   getAllTasks,
   createTask,
@@ -10,7 +12,7 @@ import {
 
 const router = express.Router();
 
-router.route("/").get(getAllTasks).post(createTask);
+router.route("/").get(getAllTasks).post(taskValidation(),createTask);
 
 router.route("/:id").get(getSingleTask).patch(updateTask).delete(deleteTask);
 

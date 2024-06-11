@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
+import { validationResult } from "express-validator";
 
 import { Task } from "../model/task-model.js";
 import { CustomError } from "../utils/ErrorClass.js";
 
+//Get Tasks
 const getAllTasks = async (req, res, next) => {
   const { search } = req.query;
 
@@ -27,8 +29,17 @@ const getAllTasks = async (req, res, next) => {
   }
 };
 
+//Create new Task
 const createTask = async (req, res, next) => {
   const { title, description, startDate, endDate } = req.body;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const fieldErrors = errors.errors.map((error) => error.msg);
+    const error = new CustomError(fieldErrors, 400);
+    next(error);
+  }
 
   try {
     const newTask = new Task({
@@ -37,20 +48,16 @@ const createTask = async (req, res, next) => {
       startDate,
       endDate,
     });
+
     await newTask.save();
     return res.status(201).json({ success: true, task: newTask });
   } catch (err) {
-    if (err?.name === "ValidationError") {
-      const errorFields = Object.keys(err?.errors);
-      const errorMessages = errorFields?.map((field) => `${field} is required`);
-      const error = new CustomError(errorMessages.join(", "), 400, err.stack);
-      next(error);
-    } else {
-      next(err);
-    }
+    const error = new CustomError(err.message, 400, err.stack);
+    next(error);
   }
 };
 
+//Get Single Task
 const getSingleTask = async (req, res, next) => {
   const { id } = req.params;
 
@@ -67,12 +74,18 @@ const getSingleTask = async (req, res, next) => {
   }
 };
 
+//Update Task
 const updateTask = async (req, res, next) => {
   const { id } = req.params;
   const { status } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const error = new CustomError("Invalid id", 400);
+    next(error);
+  }
+
+  if (!status) {
+    const error = new CustomError("Status is Required", 400);
     next(error);
   }
 
@@ -96,6 +109,7 @@ const updateTask = async (req, res, next) => {
   }
 };
 
+//Delete Task
 const deleteTask = async (req, res, next) => {
   const { id } = req.params;
 
