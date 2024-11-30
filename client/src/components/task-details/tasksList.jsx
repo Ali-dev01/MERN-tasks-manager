@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -86,7 +86,7 @@ const TasksList = () => {
           sx={{
             borderRadius: "20px",
             background: "#191919",
-            padding: { xs: "10px", md: "10px 20px" },
+            padding: { xs: "10px", md: "15px 20px" },
           }}
         >
           <Box
@@ -96,7 +96,9 @@ const TasksList = () => {
               alignItems: "center",
             }}
           >
-            <ArrowBackIosNew sx={{ cursor: "pointer", color: "#e5e5e5" }} />
+            <Link to={`/`}>
+              <ArrowBackIosNew sx={{ cursor: "pointer", color: "#e5e5e5" }} />
+            </Link>
             <Typography
               sx={{
                 fontWeight: 600,

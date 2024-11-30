@@ -1,13 +1,12 @@
 import React from "react";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ReactEcharts from "echarts-for-react";
 
 const StatisticsCharts = () => {
   const data = [
-    { value: 580, name: "Working on", itemStyle: { color: "#5A55CB" } },
+    { value: 580, name: "Running", itemStyle: { color: "#5A55CB" } },
     { value: 735, name: "Completed", itemStyle: { color: "#2CC09C" } },
     { value: 484, name: "Pending", itemStyle: { color: "#F46A50" } },
-    { value: 1048, name: "Total Tasks", itemStyle: { color: "#F7F6FB" } },
   ];
 
   // Calculate the total value for all data points
@@ -30,7 +29,12 @@ const StatisticsCharts = () => {
       formatter: "{a} <br/>{b}: {c} ({d}%)",
     },
     legend: {
-      show: false,
+      show: true,
+      left: 'center',
+      itemGap: 20,
+      textStyle:{
+        color: '#fff'
+      }
     },
     series: [
       {
@@ -58,17 +62,12 @@ const StatisticsCharts = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Typography sx={{ fontWeight: 600, color: "#e5e5e5" }}>Statistics</Typography>
-        <Avatar sx={{ bgcolor: "#ccc" }}>AB</Avatar>
+      <Typography sx={{ fontWeight: 600, fontSize: "20px", color: "#e5e5e5", textAlign: "center" }}>
+        Statistics
+      </Typography>
+      <Box sx={{ display: "flex", height: "90%", justifyContent: "center", alignItems: "center" }}>
+        <ReactEcharts option={option} style={{ height: "340px", width: "100%" }} />
       </Box>
-      <ReactEcharts option={option} style={{ height: "220px", width: "100%" }} />
     </>
   );
 };

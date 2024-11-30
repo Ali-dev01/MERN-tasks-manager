@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const ListCard = ({ taskName, taskCount, iconInfo }) => {
   const { icon, bg } = iconInfo;
@@ -12,17 +13,34 @@ const ListCard = ({ taskName, taskCount, iconInfo }) => {
         alignItems: "center",
         cursor: "pointer",
         borderRadius: "12px",
-        p: 1.2,
-        mb: 2,
+        py: 2.5,
+        px: 2,
+        mb: 3,
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Box sx={{ px: 0.8, pt: 0.6, pb: 0.3, borderRadius: "10px", background: bg, mr: 1 }}>
+        <Box
+          sx={{
+            width: "60px",
+            height: "60px",
+            borderRadius: "10px",
+            background: bg,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mr: 1.5,
+          }}
+        >
           {icon}
         </Box>
-        <Typography sx={{ color: "#e5e5e5" }}>{taskName}</Typography>
+        <Stack gap={0}>
+          <Typography sx={{ color: "#e5e5e5", fontSize: "18px" }}>{taskName}</Typography>
+          <Typography sx={{ color: "#ccc", fontSize: "18px" }}>{taskCount}</Typography>
+        </Stack>
       </Box>
-      <Typography sx={{ color: "#ccc" }}>{taskCount}</Typography>
+      <IconButton>
+        <KeyboardArrowRightIcon style={{ color: "#fff" }} />
+      </IconButton>
     </Box>
   );
 };

@@ -1,46 +1,37 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import StatisticsCharts from "./statistics-charts";
 import TaskLists from "./task-list";
 
 const TaskStatistics = () => {
   return (
-    <Grid
-      container
-      sx={{
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <Grid
-        item
-        xs={11}
-        sm={8}
-        md={5}
-        lg={4}
+    <>
+      <Box
         sx={{
           background: "#191919",
-          justifyContent: "center",
           borderRadius: "20px",
+          mx: { lg: "10rem", md: "5rem", xs: "1rem" },
         }}
       >
-        <Box
-          sx={{
-            padding: "5px 20px",
-            background: "#323232",
-            borderRadius: "20px",
-          }}
-        >
-          <StatisticsCharts />
-        </Box>
-        <Box px={1.5}>
-          <Box mt={1} sx={styles.tasksInfoList}>
-            <TaskLists />
+        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: "12px" }}>
+          <Box
+            sx={{
+              p: "20px 20px",
+              background: "#323232",
+              width: { xs: "auto", md: "40%" },
+              borderRadius: "20px",
+            }}
+          >
+            <StatisticsCharts />
+          </Box>
+          <Box sx={{ width: { xs: "auto", md: "60%" }, mx:'15px' }}>
+            <Box>
+              <TaskLists />
+            </Box>
           </Box>
         </Box>
-      </Grid>
-    </Grid>
+      </Box>
+    </>
   );
 };
 
@@ -48,7 +39,7 @@ export default TaskStatistics;
 
 const styles = {
   tasksInfoList: {
-    height: "calc(100vh - 312px)",
+    height: "calc(100vh - 40px)",
     overflowY: "hidden",
     "&:hover": {
       overflowY: "auto",

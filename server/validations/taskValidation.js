@@ -17,3 +17,13 @@ export const taskValidation = () => {
     body("status").notEmpty().withMessage("status is required"),
   ];
 };
+
+export const updateTaskValidation = () => {
+  return [
+    body("status")
+      .notEmpty()
+      .withMessage("Status is required")
+      .isIn(["PENDING", "INPROGRESS", "COMPLETED"])
+      .withMessage("Valid status values are 'PENDING','INPROGRESS','COMPLETED'"),
+  ];
+};

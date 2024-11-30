@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 
 import dbConnection from "./config/db.js";
-import tasksRouter from "./routes/tasks-routes.js";
+import userRoutes from "./routes/user-routes.js";
+import tasksRoutes from "./routes/tasks-routes.js";
 import { ErrorHandler } from "./middlewares/errorHandler.js";
 
 dotenv.config();
@@ -11,7 +12,8 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 
-app.use("/api/tasks", tasksRouter);
+app.use("/api/auth", userRoutes);
+app.use("/api/tasks", tasksRoutes);
 app.use(ErrorHandler);
 
 app.all("*", (req, res) => {

@@ -78,15 +78,18 @@ const getSingleTask = async (req, res, next) => {
 const updateTask = async (req, res, next) => {
   const { id } = req.params;
   const { status } = req.body;
+  const errors = validationResult(req);
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const error = new CustomError("Invalid id", 400);
     next(error);
   }
 
-  if (!status) {
-    const error = new CustomError("Status is Required", 400);
+  if (!errors.isEmpty()) {
+    const fieldErrors = errors.array().map((error) => error.msg);
+    const error = new CustomError(fieldErrors, 400);
     next(error);
+    return;
   }
 
   try {
@@ -97,15 +100,7 @@ const updateTask = async (req, res, next) => {
     );
     return res.json({ success: true, data: updatedTask });
   } catch (err) {
-    if (err.name === "ValidationError") {
-      const error = new CustomError(
-        "Valid status values are 'PENDING','INPROGRESS','COMPLETED'",
-        400
-      );
-      next(error);
-    } else {
-      next(err.message, err.status, err.stack);
-    }
+    next(err.message, err.status, err.stack);
   }
 };
 
