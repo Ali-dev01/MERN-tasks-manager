@@ -22,10 +22,10 @@ const initialFormValues = {
 
 const TasksList = () => {
   const [value, setValue] = useState(today.getDate());
+  const [isError, setIsError] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchValue, setSearchValue] = useState("");
-  const [isError, setIsError] = useState(false);
   const [formValues, setFormValues] = useState(initialFormValues);
 
   const { taskName } = useParams();

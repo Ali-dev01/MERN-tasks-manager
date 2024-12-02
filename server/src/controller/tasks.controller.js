@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { validationResult } from "express-validator";
 
-import { Task } from "../model/task-model.js";
+import { Task } from "../model/task.model.js";
 import { CustomError } from "../utils/ErrorClass.js";
 
 //Get Tasks
@@ -57,23 +57,6 @@ const createTask = async (req, res, next) => {
   }
 };
 
-//Get Single Task
-const getSingleTask = async (req, res, next) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    const error = new CustomError("Invalid id", 400);
-    next(error);
-  }
-  try {
-    const task = await Task.findOne({ _id: id });
-    res.status(200).json({ success: true, data: task });
-  } catch (err) {
-    const error = new CustomError(err.message, err.status, err.stack);
-    next(error);
-  }
-};
-
 //Update Task
 const updateTask = async (req, res, next) => {
   const { id } = req.params;
@@ -108,9 +91,16 @@ const updateTask = async (req, res, next) => {
 const deleteTask = async (req, res, next) => {
   const { id } = req.params;
 
+  const isExist = await Task.findOne({ _id: id });
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const error = new CustomError("Invalid id", 400);
     next(error);
+  }
+
+  if (!isExist) {
+    const error = new CustomError("No record found with this id", 400);
+    next(error)
   }
 
   try {
@@ -121,4 +111,4 @@ const deleteTask = async (req, res, next) => {
   }
 };
 
-export { getAllTasks, createTask, getSingleTask, updateTask, deleteTask };
+export { getAllTasks, createTask, updateTask, deleteTask };

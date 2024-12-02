@@ -5,10 +5,9 @@ import { taskValidation, updateTaskValidation } from "../validations/taskValidat
 import {
   getAllTasks,
   createTask,
-  getSingleTask,
   updateTask,
   deleteTask,
-} from "../controller/tasks-controller.js";
+} from "../controller/tasks.controller.js";
 
 const router = express.Router();
 
@@ -16,7 +15,6 @@ router.route("/").get(getAllTasks).post(taskValidation(), createTask);
 
 router
   .route("/:id")
-  .get(getSingleTask)
   .patch(updateTaskValidation(), updateTask)
   .delete(deleteTask);
 

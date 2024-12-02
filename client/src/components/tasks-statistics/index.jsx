@@ -36,22 +36,3 @@ const TaskStatistics = () => {
 };
 
 export default TaskStatistics;
-
-const styles = {
-  tasksInfoList: {
-    height: "calc(100vh - 40px)",
-    overflowY: "hidden",
-    "&:hover": {
-      overflowY: "auto",
-      paddingRight: "5px",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      borderRadius: "8px",
-      backgroundColor: "#323232",
-    },
-
-    "&::-webkit-scrollbar": {
-      width: "4px",
-    },
-  },
-};
